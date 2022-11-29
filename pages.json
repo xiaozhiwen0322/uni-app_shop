@@ -59,6 +59,21 @@
 			}
 		]
 	},
+	"subPackages": [{
+		"root": "subpkg",
+		"pages": [
+
+		{
+                    "path" : "goods_detail/goods_detail",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "优购物",
