@@ -1,5 +1,9 @@
 <template>
 	<view>
+		<view class="search">
+			<my-search @click="gotoSearch"></my-search>
+		</view>
+
 		<!-- 轮播图区域 -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
 			<swiper-item v-for="item in bannerList" :key="item.goods_id">
@@ -103,6 +107,12 @@
 					uni.switchTab({
 						url: "/pages/cate/cate"
 					})
+			},
+			//搜索栏跳转
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
+				})
 			}
 		}
 
@@ -154,6 +164,12 @@
 				justify-content: space-around;
 				flex-wrap: wrap;
 			}
+		}
+
+		.search {
+			position: sticky;
+			top: 0;
+			z-index: 999;
 		}
 	}
 </style>

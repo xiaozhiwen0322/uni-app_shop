@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<my-search @click="gotoSearch"></my-search>
 		<view class="body">
 			<!-- 左侧菜单栏区域 -->
 			<scroll-view class="left-scroll" scroll-y="true" :style="{height: windowHeight + 'px'}">
@@ -59,11 +60,16 @@
 				uni.navigateTo({
 					url: '/subpkg/goods_detail/goods_detail?cid=' + id
 				})
+			},
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
+				})
 			}
 		},
 		onLoad() {
 			const ansy = uni.getSystemInfoSync()
-			this.windowHeight = ansy.windowHeight;
+			this.windowHeight = ansy.windowHeight - 50;
 			this.getMenuList();
 		}
 	}
