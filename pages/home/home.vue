@@ -95,7 +95,7 @@
 				console.log(res);
 				res.message.forEach(floor => {
 					floor.product_list.forEach(prod => {
-						prod.url = prod.navigator_url = "/subpkg/goods_detail/goods_detail?" + prod
+						prod.url = prod.navigator_url = "/subpkg/goods_list/goods_list?" + prod
 							.navigator_url.split('?')[1]
 					})
 				})

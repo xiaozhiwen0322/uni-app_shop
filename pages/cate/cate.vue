@@ -19,7 +19,7 @@
 					<view class="right-title">/{{item2.cat_name}}/</view>
 					<view class="cate-lv3-list">
 						<view class="right-goods-item" v-for="(item3,i3) in item2.children" :key="i3"
-							@click="gotoGoodsDetail(item3.cat_id)">
+							@click="gotoGoodsList(item3.cat_id)">
 							<image :src="item3.cat_icon.replace('dev','web')" class="goods-item-img" />
 							<span>{{item3.cat_name}}</span>
 						</view>
@@ -56,9 +56,9 @@
 				this.goodsList = this.cateList[i].children
 				this.scroll === 0 ? this.scroll = 1 : this.scroll = 0
 			},
-			gotoGoodsDetail(id) {
+			gotoGoodsList(id) {
 				uni.navigateTo({
-					url: '/subpkg/goods_detail/goods_detail?cid=' + id
+					url: '/subpkg/goods_list/goods_list?cid=' + id
 				})
 			},
 			gotoSearch() {
