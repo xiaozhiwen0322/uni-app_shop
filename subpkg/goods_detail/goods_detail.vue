@@ -27,7 +27,7 @@
 
 			</view>
 			<!-- 快递-免运费 -->
-			<view class="express">快递:免运费</view>
+			<view class="express">快递:免运费--{{cart.length}}</view>
 
 		</view>
 		<rich-text :nodes="goodsinfo.goods_introduce"></rich-text>
@@ -39,6 +39,11 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations,
+		mapGetters
+	} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -70,7 +75,26 @@
 				]
 			}
 		},
+		computed: {
+			...mapState('moduleCart', ['cart']),
+			...mapGetters('moduleCart', ['total'])
+		},
 		methods: {
+			...mapMutations('moduleCart', ['addToCart']),
+			buttonClick(e) {
+				if (e.content.text === "加入购物车") {
+					const goods = {
+						goods_id: this.goodsinfo.goods_id,
+						goods_name: this.goodsinfo.goods_name,
+						goods_price: this.goodsinfo.goods_price,
+						goods_count: 1,
+						goods_small_logo: this.goodsinfo.goods_small_logo,
+						goods_state: true
+					}
+					this.addToCart(goods)
+					this.options[2].info = this.total
+				}
+			},
 			async getGoodsInfo(goods_id) {
 				const {
 					data: res
@@ -101,6 +125,7 @@
 		onLoad(options) {
 			const goods_id = options.goods_id
 			this.getGoodsInfo(goods_id)
+			this.options[2].info = this.total
 		}
 
 	}

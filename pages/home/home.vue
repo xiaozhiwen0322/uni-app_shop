@@ -48,7 +48,9 @@
 </template>
 
 <script>
+	import badgeMix from '@/mixins/tabbar-badge.js'
 	export default {
+		mixins: [badgeMix],
 		data() {
 			return {
 				// 轮播图数据
@@ -62,7 +64,8 @@
 		onLoad() {
 			this.getBannerList();
 			this.getnavList();
-			this.getFloorList()
+			this.getFloorList();
+			this.setBadge()
 		},
 		methods: {
 			// 获取轮播图数据请求

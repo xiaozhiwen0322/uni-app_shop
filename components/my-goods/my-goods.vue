@@ -2,6 +2,8 @@
 	<view class="goods-item">
 		<!-- 左侧的盒子 -->
 		<view class="goods-item-left">
+			<radio :checked="goods.goods_state" color="#C00000" v-if="showRadio" @click="changeState">
+			</radio>
 			<image :src="goods.goods_small_logo || defaultPic" class="goods-pic"></image>
 		</view>
 		<!-- 右侧的盒子 -->
@@ -11,6 +13,10 @@
 			<view class="goods-info-box">
 				<view class="goods-price">
 					￥{{goods.goods_price | toFixed}}
+				</view>
+				<view class="num-box">
+					<uni-number-box min="1" v-if="showNum" :value="goods.goods_count" @change="changeNum">
+					</uni-number-box>
 				</view>
 			</view>
 		</view>
@@ -24,6 +30,14 @@
 			goods: {
 				type: Object,
 				default: {}
+			},
+			showRadio: {
+				type: Boolean,
+				default: false
+			},
+			showNum: {
+				type: Boolean,
+				default: false
 			}
 		},
 		filters: {
@@ -35,6 +49,20 @@
 			return {
 
 			};
+		},
+		methods: {
+			changeState() {
+				this.$emit('radioChange', {
+					goods_id: this.goods.goods_id,
+					goods_state: !this.goods.goods_state
+				})
+			},
+			changeNum(val) {
+				this.$emit('numChange', {
+					goods_id: this.goods.goods_id,
+					goods_count: val + 0
+				})
+			}
 		}
 	}
 </script>
@@ -47,6 +75,9 @@
 
 		.goods-item-left {
 			margin-right: 5px;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
 
 			.goods-pic {
 				width: 100px;
@@ -58,6 +89,7 @@
 		.goods-item-right {
 			display: flex;
 			flex-direction: column;
+			flex: 1;
 			justify-content: space-between;
 
 			.goods-name {
@@ -65,6 +97,10 @@
 			}
 
 			.goods-info-box {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
 				.goods-price {
 					color: #c00000;
 					font-size: 16px;
