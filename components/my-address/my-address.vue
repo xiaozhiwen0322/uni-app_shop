@@ -48,7 +48,7 @@
 			}
 		},
 		computed: {
-			...mapState('moduleState', ['address']),
+			...mapState('moduleAddress', ['address']),
 			...mapGetters('moduleAddress', ['addstr'])
 		}
 	}
